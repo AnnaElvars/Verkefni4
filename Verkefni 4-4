@@ -1,0 +1,41 @@
+import 'dart:convert';
+import 'dart:core';
+import 'dart:io';
+
+void main(){
+  String string = "";
+  List list = [];
+
+  while(string != null) {
+    string = askUser(string, list);
+  }
+
+  renderList(list);
+}
+
+String askUser(string, list) {
+  print ('Insert a string');
+  String input = stdin.readLineSync(encoding: Encoding.getByName("UTF-8"));
+
+  if(input == "") {
+    string = null;
+    return string;
+  } else {
+    string = input;
+    list = addToList(string, list);
+    return string;
+  }
+}
+
+List addToList(string, list) {
+  list.add(string);
+
+  return list;
+}
+
+List renderList(list) {
+  List reversedList = list.reversed.toList();
+
+  print("Reversed List:");
+  print(reversedList);
+}
