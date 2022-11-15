@@ -1,0 +1,54 @@
+import 'dart:convert';
+import 'dart:core';
+import 'dart:io';
+import 'dart:math';
+
+void main(){
+  int number = 0;
+  List<int> numList = [];
+
+  while(number != null) {
+    number = askUser(number, numList);
+  }
+
+  print("Lowest number: " + renderNumber(numList, "lowest"));
+  print("Highest number: " + renderNumber(numList, "highest"));
+}
+
+int askUser(number, numList) {
+  print ('Insert a number');
+  String inputNum = stdin.readLineSync(encoding: Encoding.getByName("UTF-8"));
+
+  if(inputNum == "") {
+    number = null;
+    return number;
+  } else {
+    number = int.tryParse(inputNum);
+    numList = addToList(number, numList);
+    return number;
+  }
+}
+
+List addToList(num, numList) {
+  numList.add(num);
+
+  return numList;
+}
+
+String renderNumber(numList, type) {
+  List<int> list = numList;
+
+  var lowestNum = list.reduce(min).toString();
+  var highestNum = list.reduce(max).toString();
+  var num = "";
+
+  if(type == "lowest") {
+    num = lowestNum;
+  }
+
+  if(type == "highest") {
+     num = highestNum;
+  }
+
+  return num;
+}
